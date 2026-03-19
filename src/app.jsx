@@ -62,6 +62,7 @@ export function App() {
       </main>
     </div>
     <Cart />
+    
   </>
     )
 }
