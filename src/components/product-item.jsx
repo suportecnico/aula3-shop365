@@ -1,4 +1,4 @@
-export function ProductItem({ title, category, price, thumbnail }) {
+export function ProductItem({ title, category, price, thumbnail, onAddCarrinho }) {
   // Podemos acessar os ítens da lista por porps, exemplo: props.title.
   // Ou por desestruturação, exemplo: ProductItem({ title })
 
@@ -20,7 +20,7 @@ export function ProductItem({ title, category, price, thumbnail }) {
               <p className="product-brand">{category}</p>
               <div className="product-footer">
                 <span className="product-price">{priceFormat}</span>
-                <button className="add-cart-btn">
+                <button className="add-cart-btn" onClick={onAddCarrinho}>
                   <i className="fas fa-cart-plus"></i>
                 </button>
               </div>

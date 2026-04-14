@@ -10,20 +10,22 @@ export function App() {
   // Recebendo o estado dos itens da lista.
 
   const [filterSelected, setFilterSelected] = useState("all");
+  const [cart, setCart] = useState([]);
 
   const productsFilters = filterSelected === "all" ? products : products.filter((product) => product.category === filterSelected);
-
-  const listaProdutosItem = productsFilters.map((product) => {
-    return <ProductItem key={`${product.id}-${product.title}`} title={product.title} 
-    price={product.price}
-    category={product.category}
-    thumbnail={product.thumbnail}
-    />
-  });
 
     function handleOnChange(event) {
       setFilterSelected(event.target.value)
       console.log(event.target.value);
+    }
+
+    function handleAddCart(idProduct) {
+      const productSelected = products.find((product) => product.id === idProduct);
+
+      if(productSelected) {
+        setCart([...cart, productSelected]);
+      }
+    
     }
 
     return (
@@ -33,6 +35,7 @@ export function App() {
       
       <main className="products-section">
         <h1 className="section-title">Produtos</h1>
+
           <div className="filters">
             <div className="filters-btns">
               <button className={filterSelected === "all" ? "active" : ""} onClick={() => setFilterSelected("all")}>All</button>
@@ -56,12 +59,21 @@ export function App() {
               <option value="home">Home</option>
             </select>
           </div>
+
         <div className="products-grid" id="products-list">
-          {listaProdutosItem}
+          {productsFilters.map((product) => <ProductItem 
+            key={`${product.id}-${product.title}`} title={product.title}
+            price={product.price}
+            category={product.category}
+            thumbnail={product.thumbnail}
+            onAddCarrinho={() => handleAddCart(product.id)}
+          />)}
         </div>
+
       </main>
     </div>
-    <Cart />
+    
+    <Cart itens={cart} /> 
     
   </>
     )
