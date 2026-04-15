@@ -54,7 +54,8 @@ header {
 
 /* Products Section */
 .products-section {
-    width: 100%;
+    margin: auto;
+    width: 98vw;
 }
 
 .section-title {
